@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import EditTodo from "./EditTodo";
+
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
 
@@ -12,7 +14,7 @@ const ListTodos = () => {
       });
 
       console.log(deleteTodo);
-      window.location = "/";
+      setTodos(todos.filter((todo) => todo.todo_id !== id));
     } catch (error) {
       console.error(error.message);
     }
@@ -63,11 +65,7 @@ const ListTodos = () => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>
-                <button
-                  onClick={() => editTodo(todo.todo_id)}
-                  className="btn btn-danger">
-                  Edit
-                </button>
+                <EditTodo todo={todo} />
               </td>
               <td>
                 <button
